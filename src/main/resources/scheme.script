@@ -1,0 +1,44 @@
+CREATE TABLE patient
+(
+    id INT PRIMARY KEY  IDENTITY,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    patronymic VARCHAR(50) NOT NULL,
+    phone VARCHAR(50)  NULL,
+)
+
+CREATE TABLE doctor
+(
+     id INT PRIMARY KEY  IDENTITY,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    patronymic VARCHAR(50) NOT NULL,
+    specialization VARCHAR(200)  NULL,
+
+ );
+
+CREATE TABLE priority
+(
+    id INT PRIMARY KEY  IDENTITY,
+    title VARCHAR(50) NOT NULL,
+ );
+
+CREATE TABLE recipe
+(
+
+    id INT PRIMARY KEY  IDENTITY,
+    patient_id INT  NOT NULL,
+    doctor_id INT  NOT NULL,
+
+    сreation_date DATE NOT NULL,
+    expiration_date DATE NOT NULL,
+    priority_id INT NOT NULL,
+
+
+    FOREIGN KEY (patient_id)  REFERENCES patient (id) ON DELETE RESTRICT,
+
+    FOREIGN KEY (doctor_id)  REFERENCES doctor (id) ON DELETE RESTRICT,
+
+    FOREIGN KEY (priority_id)  REFERENCES priority (id) ON DELETE RESTRICT
+
+);
