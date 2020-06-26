@@ -17,28 +17,24 @@ CREATE TABLE doctor
 
  );
 
-CREATE TABLE priority
-(
-    id INT PRIMARY KEY  IDENTITY,
-    title VARCHAR(50) NOT NULL,
- );
 
 CREATE TABLE recipe
 (
 
     id INT PRIMARY KEY  IDENTITY,
+    description VARCHAR(50) NOT NULL,
     patient_id INT  NOT NULL,
     doctor_id INT  NOT NULL,
 
     сreation_date DATE NOT NULL,
     expiration_date DATE NOT NULL,
-    priority_id INT NOT NULL,
+    priority VARCHAR(50) NOT NULL,
 
 
     FOREIGN KEY (patient_id)  REFERENCES patient (id) ON DELETE RESTRICT,
 
-    FOREIGN KEY (doctor_id)  REFERENCES doctor (id) ON DELETE RESTRICT,
+    FOREIGN KEY (doctor_id)  REFERENCES doctor (id) ON DELETE RESTRICT
 
-    FOREIGN KEY (priority_id)  REFERENCES priority (id) ON DELETE RESTRICT
+
 
 );
