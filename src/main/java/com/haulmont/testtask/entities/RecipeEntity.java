@@ -1,4 +1,4 @@
-package com.haulmont.testtask.Entities;
+package com.haulmont.testtask.entities;
 
 import com.haulmont.testtask.common.Priority;
 import lombok.*;
@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity(name = "Recipe")
 @Table(name = "recipe")
+@NamedQuery(name = "findAll ", query="select r from Recipe r")
 public class RecipeEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -29,11 +30,14 @@ public class RecipeEntity {
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
     private DoctorEntity doctor;
 
-   // @Type(type = "org.jadira.usertype.date.joda.PersistentDate")
+
+
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "сreation_date", nullable = false)
     private LocalDate сreationDate;
 
-    //@Type(type = "org.jadira.usertype.date.joda.PersistentDate")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     @Column(name = "expiration_date", nullable = false)
     private LocalDate expirationDate;
 

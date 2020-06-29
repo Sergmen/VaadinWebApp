@@ -1,7 +1,7 @@
-package com.haulmont.testtask.Entities;
+package com.haulmont.testtask.entities;
 
 import lombok.*;
-import lombok.Builder;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +10,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Entity(name = "Doctor")
-@Table(name = "doctor")
-public class DoctorEntity {
+@Entity(name = "Patient")
+@Table(name = "patient")
+@NamedQuery(name = "findAll", query="select p from Patient p")
+@NamedQuery(name = "findByName", query="select p from Patient p where concat(p.name, ' ', p.surname, ' ', p.patronymic) like concat('%', :name, '%')")
+public class PatientEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -26,12 +28,27 @@ public class DoctorEntity {
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @Column(name = "specialization", nullable = true)
-    private String specialization;
+    @Column(name = "phone", nullable = true)
+    private String phone;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "patient")
     private Set<RecipeEntity> recipes = new HashSet<>();
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

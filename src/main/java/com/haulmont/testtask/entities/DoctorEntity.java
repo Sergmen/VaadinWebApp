@@ -1,20 +1,19 @@
-package com.haulmont.testtask.Entities;
+package com.haulmont.testtask.entities;
 
 import lombok.*;
-
+import lombok.Builder;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Entity(name = "Patient")
-@Table(name = "patient")
-public class PatientEntity {
+@Entity(name = "Doctor")
+@Table(name = "doctor")
+@NamedQuery(name = "findAll ", query="select d from Doctor d")
+public class DoctorEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -28,27 +27,12 @@ public class PatientEntity {
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @Column(name = "phone", nullable = true)
-    private String phone;
+    @Column(name = "specialization", nullable = true)
+    private String specialization;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "doctor")
     private Set<RecipeEntity> recipes = new HashSet<>();
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
