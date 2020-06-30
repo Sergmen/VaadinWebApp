@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 @Entity(name = "Recipe")
 @Table(name = "recipe")
-@NamedQuery(name = "findAll ", query="select r from Recipe r")
+//@NamedQuery(name = "findAll ", query="select r from Recipe r")
 public class RecipeEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
