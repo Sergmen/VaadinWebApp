@@ -3,10 +3,12 @@ package com.haulmont.testtask.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
@@ -14,7 +16,7 @@ import java.util.Set;
 @Table(name = "patient")
 @NamedQuery(name = "findAll", query="select p from Patient p")
 @NamedQuery(name = "findByName", query="select p from Patient p where concat(p.name, ' ', p.surname, ' ', p.patronymic) like concat('%', :name, '%')")
-public class PatientEntity {
+public class PatientEntity implements Serializable, Cloneable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

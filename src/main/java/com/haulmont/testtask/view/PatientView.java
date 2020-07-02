@@ -2,44 +2,18 @@ package com.haulmont.testtask.view;
 
 import com.haulmont.testtask.entities.PatientEntity;
 import com.haulmont.testtask.service.PatientService;
+//import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.Grid;
-//import com.vaadin.ui.components.*;
-
-import javax.servlet.annotation.WebServlet;
-
-import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.ValueChangeMode;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.annotations.VaadinServletConfiguration;
+//import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-//import com.vaadin.flow.component.grid.Grid;
-//import com.vaadin.flow.component.textfield.TextField;
-//import com.vaadin.flow.component.icon.VaadinIcon;
-//import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-//import com.vaadin.flow.component.button.Button;
-//import com.vaadin.flow.data.value.ValueChangeMode;
-//import com.vaadin.flow.router.Route;
-//import com.haulmont.testtask.service.PatientService;
-//import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import javax.servlet.annotation.WebServlet;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-
-
-//@Route("")
 public class PatientView  extends UI
 {
 
@@ -48,6 +22,7 @@ public class PatientView  extends UI
     private final TextField filterText = new TextField();
   //  private final Button addNewButton = new Button("New patient", VaadinIcon.PLUS.create());
  //   private final HorizontalLayout toolbar = new HorizontalLayout(filter, addNewButton);
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -68,12 +43,12 @@ public class PatientView  extends UI
         Button addCustomerBtn = new Button("Add new customer");
         addCustomerBtn.addClickListener(e -> {
             patientGrid.asSingleSelect().clear();
-         //   form.setCustomer(new Customer());
+            //   form.setCustomer(new Customer());
         });
 
         HorizontalLayout toolbar = new HorizontalLayout(filtering, addCustomerBtn);
 
-        patientGrid.setColumns("name", "surname", "phone");
+        patientGrid.setColumns("id","name", "surname", "patronymic","phone");
 
         HorizontalLayout main = new HorizontalLayout(patientGrid);
         main.setSizeFull();
@@ -90,6 +65,7 @@ public class PatientView  extends UI
 
     }
 
+
     private void fillList(String name) {
         if (name.isEmpty()) {
             patientGrid.setItems(patientService.findAll());
@@ -97,6 +73,9 @@ public class PatientView  extends UI
             patientGrid.setItems(patientService.findByName(name));
         }
     }
+
+
+
 
     @WebServlet(urlPatterns = "/patient", name = "Patient", asyncSupported = true)
     @VaadinServletConfiguration(ui = PatientView.class, productionMode = false)

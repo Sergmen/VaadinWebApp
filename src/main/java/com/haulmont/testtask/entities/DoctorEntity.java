@@ -3,17 +3,19 @@ package com.haulmont.testtask.entities;
 import lombok.*;
 import lombok.Builder;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @Entity(name = "Doctor")
 @Table(name = "doctor")
 //@NamedQuery(name = "findAll ", query="select d from Doctor d")
-public class DoctorEntity {
+public class DoctorEntity implements Serializable, Cloneable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

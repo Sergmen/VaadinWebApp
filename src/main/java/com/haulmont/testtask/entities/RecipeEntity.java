@@ -6,15 +6,17 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
 @Entity(name = "Recipe")
 @Table(name = "recipe")
 //@NamedQuery(name = "findAll ", query="select r from Recipe r")
-public class RecipeEntity {
+public class RecipeEntity implements Serializable, Cloneable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

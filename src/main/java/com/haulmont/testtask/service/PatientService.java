@@ -33,8 +33,8 @@ public class PatientService {
      * @return all available PatientEntity objects.
      */
     public synchronized List<PatientEntity> findAll() {
-        Session session = new ProjectSessionManager().getSession();
-        List<PatientEntity> patients = session.createNamedQuery("findAll").getResultList();
+        Session session = ProjectSessionManager.getSession();
+        ArrayList<PatientEntity> patients = (ArrayList<PatientEntity>) session.createNamedQuery("findAll").getResultList();
         return  patients;
     }
 
@@ -47,7 +47,7 @@ public class PatientService {
      * @return list a Customer objects
      */
     public synchronized List<PatientEntity> findByName(String stringFilter) {
-        Session session = new ProjectSessionManager().getSession();
+        Session session = ProjectSessionManager.getSession();
         List<PatientEntity> patients = session.createNamedQuery("findByName").setParameter("name",stringFilter).getResultList();
         return patients;
     }
@@ -63,7 +63,7 @@ public class PatientService {
     public synchronized void delete(PatientEntity patient) {
 
         try {
-            Session session = new ProjectSessionManager().getSession();
+            Session session = ProjectSessionManager.getSession();
             Transaction tx = session.getTransaction();
             tx.begin();
             session.remove(patient);
@@ -87,7 +87,7 @@ public class PatientService {
             return;
         }
         try {
-            Session session = new ProjectSessionManager().getSession();
+            Session session = ProjectSessionManager.getSession();
             Transaction tx = session.getTransaction();
             tx.begin();
             session.saveOrUpdate(patient);

@@ -6,12 +6,16 @@ import javax.persistence.*;
 
 public class ProjectSessionManager {
 
-    protected Session session;
+    private static Session session = null;
 
-    public Session getSession() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceCore" );
-        EntityManager em = factory.createEntityManager();
-        session =  em.unwrap(Session.class);
+    private ProjectSessionManager() { }
+
+    public static Session getSession() {
+        if (session==null) {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("PersistenceCore");
+            EntityManager em = factory.createEntityManager();
+            session = em.unwrap(Session.class);
+        }
 
         return session;
     }
